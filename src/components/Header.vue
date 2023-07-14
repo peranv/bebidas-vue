@@ -1,9 +1,16 @@
 <script setup>
-   import { RouterLink } from 'vue-router'
+   import { computed } from 'vue'
+   import { RouterLink, useRoute } from 'vue-router'
+   import { useBebidasStore } from '../stores/bebidas'
+
+   const route = useRoute()
+   const store = useBebidasStore()
+   const paginaInicio = computed(()=> route.name === 'inicio')
+
 </script>
 
 <template>
-  <header class="bg-slate-800">
+  <header class="bg-slate-800" :class="{header: paginaInicio}">
    <div class="mx-auto container px-5 py-16">
     <div class="flex justify-between items-center ">
         <div>
@@ -26,7 +33,9 @@
                 </RouterLink>
         </nav>
     </div>
-    <form class="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-6">
+    <form class="md:w-1/2 2xl:w-1/3 bg-orange-400 my-32 p-10 rounded-lg shadow space-y-6"
+        v-if="paginaInicio"
+    >
         <div class="space-y-4">
              <label for="ingrediente" class="block text-white uppercase font-extrabold text-lg"> 
                 Nombre o Ingredientes
@@ -59,3 +68,11 @@
    </div>
   </header>
 </template>
+
+<style>
+   .header{
+        background-image: url('/img/bg.jpg');
+        background-size: cover;
+        background-position: center;
+   }
+</style>
