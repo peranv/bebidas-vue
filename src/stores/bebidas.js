@@ -10,6 +10,7 @@ export const useBebidasStore = defineStore('bebidas', () =>{
      nombre:'',
      categorias:''
    })
+   const recetas = ref([])
 
    onMounted(async() => {
     // se puede omitir .get proque es el metodo default
@@ -20,13 +21,15 @@ export const useBebidasStore = defineStore('bebidas', () =>{
       //console.log(categorias.value)
    })
 
-   function obtenerRecetas(){
-      console.log('Consultando API...')
+    async function  obtenerRecetas(){
+     const {data: {drinks}} =  await APIService.buscarRecetas(busqueda)
+     recetas.value = drinks
    }
 
    return {
       categorias,
       busqueda,
-      obtenerRecetas
+      obtenerRecetas,
+      recetas
    }
 })
