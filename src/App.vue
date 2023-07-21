@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
   import Header from './components/Header.vue';
+  import Modal from './components/Modal.vue'
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import { RouterLink } from 'vue-router'
   <main class="container mx-auto mt-10">
      <RouterView />
   </main>
+  <Modal />
 </template>
 
 <style scoped>
