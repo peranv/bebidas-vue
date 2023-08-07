@@ -2,14 +2,26 @@
    import { computed } from 'vue'
    import { RouterLink, useRoute } from 'vue-router'
    import { useBebidasStore } from '../stores/bebidas'
+   import { useNotificacionStore } from '../stores/notificaciones';
 
    const route = useRoute()
    const store = useBebidasStore()
+   const notificaciones = useNotificacionStore()
    const paginaInicio = computed(()=> route.name === 'inicio')
 
    const handelSubmit = () =>{
-        //TODO: Validar
-        store.obtenerRecetas()
+       /*  if(Object.values(store.busqueda).includes('')){
+          
+          notificaciones.$patch({
+            texto: 'Todos los campos son obligatorios',
+            mostrar: true,
+            error: true
+          })
+
+         return
+        } */
+         store.obtenerRecetas()
+        
    }
 
 </script>
@@ -23,15 +35,15 @@
                <img class="w-32" src="/img/logo.svg" alt="Logotipo" />
            </RouterLink>
         </div>
-        <nav class="flex gap-4">
+        <nav class="flex gap-4 text-white">
                 <RouterLink :to="{name: 'inicio'}"
-                            class="text-white uppercase font-bold "
+                            class=" uppercase font-bold "
                             active-class="text-orange-500"
                 >
                         Inicio
                 </RouterLink>
                 <RouterLink :to="{name: 'favoritos'}"
-                            class="text-white uppercase font-bold "
+                            class=" uppercase font-bold "
                             active-class="text-orange-500"
                 >
                         Favoritos
